@@ -1,0 +1,97 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { background: #12181f; color: #fff; font: 15px/1.5 Arial, sans-serif; }
+
+a { color: #529ecc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h3 { margin-bottom: 6px; }
+
+.sub { color: #8fa5b8; font-size: 13px; margin-bottom: 12px; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
+
+/* --- Шапка и меню (мобильный вид: лого сверху, меню вертикальным списком) --- */
+.header { width: 100%; background: #1d4b73; padding: 14px 0 10px; color: #fff; }
+.header .container { display: block; }
+
+.brand { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.site-logo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: #fff; display: block; }
+.site-title { font-size: 19px; font-weight: bold; color: #fff; }
+
+.nav { display: flex; flex-direction: column; gap: 8px; }
+.nav a { color: #529ecc; }
+
+/* --- Контентная область: Flex Box + order для мобильного вида ---
+   На смартфоне секции идут колонкой, и таблица (#table) поднимается
+   визуально выше списка ссылок (#links) за счёт order, хотя в HTML
+   список ссылок стоит раньше таблицы. */
+main.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#table { order: -1; }
+#links { order: 0; }
+#form  { order: 1; }
+
+/* --- Блоки контента --- */
+.block { background: #161f28; border: 1px solid #283745; border-radius: 4px; padding: 20px; margin: 20px 0; width: 100%; }
+.block h2 { color: #5aa9de; font-size: 20px; margin-bottom: 12px; border-bottom: 1px solid #233444; padding-bottom: 8px; }
+.block ul, .block ol { padding-left: 20px; }
+.block li { margin-bottom: 8px; }
+
+/* --- Таблица с единым цветом фона --- */
+table, .custom-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #12181f; }
+table th, table td, .custom-table th, .custom-table td { border: 1px solid #3b5a7a; padding: 8px 12px; text-align: left; }
+table th, .custom-table th { background: #185a9d; color: #fff; }
+table tbody td, .custom-table tbody td { background: #12181f; color: #fff; }
+.c { text-align: center; font-weight: bold; }
+
+/* --- Форма обратной связи --- */
+.feed-form label { display: block; margin-top: 10px; color: #e2ecf5; }
+.feed-form input[type="text"],
+.feed-form input[type="email"],
+.feed-form input[type="tel"],
+.feed-form textarea {
+  width: 100%; max-width: 450px; display: block; margin-top: 4px; padding: 8px;
+  background: #10161d; border: 1px solid #2f4963; color: #fff; border-radius: 4px; outline: none; font: inherit;
+}
+.feed-form input:focus, .feed-form textarea:focus { border-color: #529ecc; box-shadow: 0 0 0 2px rgba(82, 158, 204, 0.25); }
+.feed-form .chk { display: flex; align-items: center; gap: 8px; margin-top: 12px; cursor: pointer; }
+.feed-form button { margin-top: 12px; padding: 8px 20px; background: #184a75; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.feed-form button:hover { background: #12395c; }
+
+/* --- Футер --- */
+.footer { width: 100%; background: #123859; color: #fff; padding: 16px 0; text-align: center; font-size: 13px; }
+.footer a { color: #8ec9f2; }
+
+
+/* =========================================================
+   MEDIA QUERY: планшеты и десктопы (от 700px и шире)
+   Здесь возвращаем вид "как в предыдущем задании":
+   меню горизонтальное, секции идут в обычном порядке HTML
+   (display: block вместо flex — свойство order перестаёт работать).
+   ========================================================= */
+@media screen and (min-width: 700px) {
+
+  .header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .brand { margin-bottom: 0; }
+
+  .nav {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  main.container {
+    display: block;
+  }
+}
+
