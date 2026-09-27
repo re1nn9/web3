@@ -1,3 +1,7 @@
+/* =========================================================
+   MOBILE FIRST: базовые правила для смартфонов (без media query)
+   ========================================================= */
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body { background: #12181f; color: #fff; font: 15px/1.5 Arial, sans-serif; }
@@ -42,9 +46,16 @@ main.container {
 .block ul, .block ol { padding-left: 20px; }
 .block li { margin-bottom: 8px; }
 
-/* --- Таблица с единым цветом фона --- */
-table, .custom-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #12181f; }
-table th, table td, .custom-table th, .custom-table td { border: 1px solid #3b5a7a; padding: 8px 12px; text-align: left; }
+/* --- Таблица с единым цветом фона (адаптивная шапка/ячейки) --- */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
+}
+
+table, .custom-table { width: 100%; min-width: 460px; border-collapse: collapse; background: #12181f; }
+table th, table td, .custom-table th, .custom-table td { border: 1px solid #3b5a7a; padding: 6px 8px; font-size: 13px; text-align: left; }
 table th, .custom-table th { background: #185a9d; color: #fff; }
 table tbody td, .custom-table tbody td { background: #12181f; color: #fff; }
 .c { text-align: center; font-weight: bold; }
@@ -93,5 +104,11 @@ table tbody td, .custom-table tbody td { background: #12181f; color: #fff; }
   main.container {
     display: block;
   }
-}
 
+  table th, table td, .custom-table th, .custom-table td {
+    padding: 8px 12px;
+    font-size: 15px;
+  }
+
+  table, .custom-table { min-width: 0; }
+}
