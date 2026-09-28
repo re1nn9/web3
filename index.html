@@ -7,18 +7,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="header">
+
+<header class="header" id="top">
   <div class="container">
     <div class="brand">
-      <a href="https://kubsu.ru" class="logo-box" title="КубГУ">
+      <a href="https://kubsu.ru/" class="logo-box" title="КубГУ">
         <img src="kubanskiy.jpg" alt="КубГУ" class="site-logo">
       </a>
       <h1 class="site-title">Zika-учебный сайт</h1>
     </div>
-    <nav class="nav"><a href="#links">Ссылки</a><a href="#table">Таблица</a><a href="#form">Форма</a></nav>
+    <nav class="nav" id="menu">
+      <a href="#links">Ссылки</a>
+      <a href="#table">Таблица</a>
+      <a href="#form">Форма</a>
+    </nav>
   </div>
 </header>
+
 <main class="container">
+
   <section id="links" class="block">
     <h2>Список гиперссылок</h2>
     <ul>
@@ -37,24 +44,35 @@
       <li><p>Текст с <a href="https://kubsu.ru/">контекстной ссылкой</a> в предложении.</p></li>
       <li><a href="https://ru.wikipedia.org/wiki/HTML#История">Фрагмент стороннего сайта</a></li>
       <li>
-        <img src="image.jpg" width="200" height="100" usemap="#navmap" alt="Карта">
-        <map name="navmap"><area shape="rect" coords="0,0,100,100" href="https://kubsu.ru/" alt="КубГУ"><area shape="circle" coords="150,50,40" href="https://google.com/" alt="Google"></map>
+        <img src="image.jpg" width="200" height="100" usemap="#navmap" alt="Картинка со ссылками: прямоугольник ведёт на КубГУ, круг на Google">
+        <map name="navmap">
+          <area shape="rect" coords="0,0,100,100" href="https://kubsu.ru/" alt="КубГУ">
+          <area shape="circle" coords="150,50,40" href="https://google.com/" alt="Google">
+        </map>
       </li>
       <li><a href="">Пустой href</a></li>
       <li><a>Без href</a></li>
       <li><a href="https://example.com/" rel="nofollow">Запрещен переход</a></li>
       <li><!--noindex--><a href="https://example.com/">Без индексации</a><!--/noindex--></li>
-      <li>Нумерованный список:<ol><li><a href="https://kubsu.ru/" title="КубГУ">КубГУ</a></li><li><a href="https://google.com/" title="Google">Google</a></li></ol></li>
-      <li><a href="ftp://ftp.example.com/file.zip">FTP с авторизацией</a></li>
+      <li>Нумерованный список:
+        <ol>
+          <li><a href="https://kubsu.ru/" title="Сайт КубГУ">КубГУ</a></li>
+          <li><a href="https://google.com/" title="Поисковая система Google">Google</a></li>
+        </ol>
+      </li>
+      <li><a href="ftp://ftp.example.com/file.zip" title="Вход по логину и паролю">FTP с авторизацией</a> (логин user, пароль password)</li>
     </ul>
     <h3 id="section1">Фрагмент текущей страницы</h3>
   </section>
+
   <section id="table" class="block">
     <h2>Таблица учебных материалов</h2>
     <p class="sub">План работы над учебным сайтом</p>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>Неделя</th><th>Тема</th><th>Материал</th><th>Статус</th></tr></thead>
+        <thead>
+        <tr><th scope="col">Неделя</th><th scope="col">Тема</th><th scope="col">Материал</th><th scope="col">Статус</th></tr>
+        </thead>
         <tbody>
         <tr><td rowspan="2" class="c">1</td><td>Гиперссылки</td><td>Абсолютные и относительные пути</td><td>Готово</td></tr>
         <tr><td>Навигация</td><td>Якорные ссылки и меню</td><td>Готово</td></tr>
@@ -66,22 +84,55 @@
       </table>
     </div>
   </section>
+
   <section id="form" class="block">
-    <h2>Форма обратной связи</h2>
-    <form action="/" method="POST" class="feed-form">
-      <label>Имя<input type="text" name="name" required></label>
-      <label>Электронная почта<input type="email" name="email" required></label>
-      <label>Телефон<input type="tel" name="phone" id="phone" pattern="[0-9+]{10,}" title="Формат: +7... или 10 цифр" required></label>
-      <label>Сообщение<textarea name="message" rows="5" required></textarea></label>
-      <label class="chk"><input type="checkbox" name="agree" required> Я согласен на обработку данных формы.</label>
-      <button type="submit">Отправить</button>
+    <h2>Форма</h2>
+    <form action="#form" method="get" class="feed-form">
+      <label>ФИО
+        <input type="text" name="fullname" required placeholder="Иванов Иван Иванович"
+               pattern="[A-Za-zА-Яа-яЁё\s\-]+" title="Только буквы, пробелы и дефис">
+      </label>
+      <label>Телефон
+        <input type="tel" name="phone" required placeholder="+79001234567"
+               pattern="\+?[0-9]{10,15}" title="От 10 до 15 цифр, можно с плюсом в начале">
+      </label>
+      <label>E-mail
+        <input type="email" name="email" autocomplete="email" required>
+      </label>
+      <label>Дата рождения
+        <input type="date" name="birthdate" min="1900-01-01" required>
+      </label>
+      <fieldset>
+        <legend>Пол</legend>
+        <label class="chk"><input type="radio" name="gender" value="male" required> Мужской</label>
+        <label class="chk"><input type="radio" name="gender" value="female"> Женский</label>
+      </fieldset>
+      <label>Любимый язык программирования (можно выбрать несколько)
+        <select name="languages[]" multiple size="6" required>
+          <option value="Pascal">Pascal</option>
+          <option value="C">C</option>
+          <option value="C++">C++</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="PHP">PHP</option>
+          <option value="Python">Python</option>
+          <option value="Java">Java</option>
+        </select>
+      </label>
+      <label>Биография
+        <textarea name="bio" rows="5"></textarea>
+      </label>
+      <label class="chk"><input type="checkbox" name="contract" required> С контрактом ознакомлен(а)</label>
+      <button type="submit">Сохранить</button>
     </form>
   </section>
+
 </main>
+
 <footer class="footer">
   <div class="container">
     <p>&copy; 2026 Zika. Учебная работа по разработке Web-интерфейса.<br>Контактные данные: <a href="mailto:vladzika2007@mail.ru">vladzika2007@mail.ru</a></p>
   </div>
 </footer>
+
 </body>
 </html>

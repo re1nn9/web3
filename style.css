@@ -1,13 +1,18 @@
 /* =========================================================
    MOBILE FIRST: базовые правила для смартфонов (без media query)
+   Шапка, меню, контент и футер занимают 100% ширины экрана.
    ========================================================= */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
 
 body { background: #12181f; color: #fff; font: 15px/1.5 Arial, sans-serif; }
 
 a { color: #529ecc; text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+img { max-width: 100%; }
 
 h3 { margin-bottom: 6px; }
 
@@ -15,25 +20,29 @@ h3 { margin-bottom: 6px; }
 
 .container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
 
-/* --- Шапка и меню (мобильный вид: лого сверху, меню вертикальным списком) --- */
+/* --- Шапка и меню (мобильный вид: лого и название, ниже меню списком) --- */
 .header { width: 100%; background: #1d4b73; padding: 14px 0 10px; color: #fff; }
-.header .container { display: block; }
+.header .container { display: flex; flex-direction: column; }
 
 .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.site-logo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: #fff; display: block; }
+.logo-box { display: block; line-height: 0; }
+.site-logo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; background: #fff; display: block; }
 .site-title { font-size: 19px; font-weight: bold; color: #fff; }
 
-.nav { display: flex; flex-direction: column; gap: 8px; }
-.nav a { color: #529ecc; }
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav a { color: #cfe8fa; padding: 6px 0; }
+.nav a:hover { color: #fff; }
 
-/* --- Контентная область: Flex Box + order для мобильного вида ---
+/* --- Контентная область: Flex Box + order ---
    На смартфоне секции идут колонкой, и таблица (#table) поднимается
    визуально выше списка ссылок (#links) за счёт order, хотя в HTML
    список ссылок стоит раньше таблицы. */
 main.container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #table { order: -1; }
@@ -41,37 +50,38 @@ main.container {
 #form  { order: 1; }
 
 /* --- Блоки контента --- */
-.block { background: #161f28; border: 1px solid #283745; border-radius: 4px; padding: 20px; margin: 20px 0; width: 100%; }
+.block { background: #161f28; border: 1px solid #283745; border-radius: 4px; padding: 20px; }
 .block h2 { color: #5aa9de; font-size: 20px; margin-bottom: 12px; border-bottom: 1px solid #233444; padding-bottom: 8px; }
 .block ul, .block ol { padding-left: 20px; }
 .block li { margin-bottom: 8px; }
 
-/* --- Таблица с единым цветом фона (адаптивная шапка/ячейки) --- */
-.table-scroll {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-top: 10px;
-}
+/* --- Таблица: прокрутка внутри блока, чередование строк --- */
+.table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; }
 
-table, .custom-table { width: 100%; min-width: 460px; border-collapse: collapse; background: #12181f; }
-table th, table td, .custom-table th, .custom-table td { border: 1px solid #3b5a7a; padding: 6px 8px; font-size: 13px; text-align: left; }
-table th, .custom-table th { background: #185a9d; color: #fff; }
-table tbody td, .custom-table tbody td { background: #12181f; color: #fff; }
+table { width: 100%; min-width: 460px; border-collapse: collapse; }
+table th, table td { border: 1px solid #3b5a7a; padding: 6px 8px; font-size: 13px; text-align: left; }
+table th { background: #185a9d; color: #fff; }
+table tbody tr:nth-child(odd) td  { background: #12181f; color: #fff; }
+table tbody tr:nth-child(even) td { background: #1c2f42; color: #fff; }
 .c { text-align: center; font-weight: bold; }
 
-/* --- Форма обратной связи --- */
+/* --- Форма --- */
 .feed-form label { display: block; margin-top: 10px; color: #e2ecf5; }
 .feed-form input[type="text"],
 .feed-form input[type="email"],
 .feed-form input[type="tel"],
+.feed-form input[type="date"],
+.feed-form select,
 .feed-form textarea {
   width: 100%; max-width: 450px; display: block; margin-top: 4px; padding: 8px;
   background: #10161d; border: 1px solid #2f4963; color: #fff; border-radius: 4px; outline: none; font: inherit;
 }
-.feed-form input:focus, .feed-form textarea:focus { border-color: #529ecc; box-shadow: 0 0 0 2px rgba(82, 158, 204, 0.25); }
-.feed-form .chk { display: flex; align-items: center; gap: 8px; margin-top: 12px; cursor: pointer; }
-.feed-form button { margin-top: 12px; padding: 8px 20px; background: #184a75; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.feed-form input[type="date"] { color-scheme: dark; }
+.feed-form input:focus, .feed-form select:focus, .feed-form textarea:focus { border-color: #529ecc; box-shadow: 0 0 0 2px rgba(82, 158, 204, 0.25); }
+.feed-form fieldset { margin-top: 12px; padding: 4px 12px 10px; max-width: 450px; border: 1px solid #2f4963; border-radius: 4px; }
+.feed-form legend { padding: 0 6px; color: #e2ecf5; }
+.feed-form .chk { display: flex; align-items: center; gap: 8px; margin-top: 8px; cursor: pointer; }
+.feed-form button { margin-top: 14px; padding: 8px 20px; background: #184a75; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
 .feed-form button:hover { background: #12395c; }
 
 /* --- Футер --- */
@@ -81,34 +91,27 @@ table tbody td, .custom-table tbody td { background: #12181f; color: #fff; }
 
 /* =========================================================
    MEDIA QUERY: планшеты и десктопы (от 700px и шире)
-   Здесь возвращаем вид "как в предыдущем задании":
-   меню горизонтальное, секции идут в обычном порядке HTML
-   (display: block вместо flex — свойство order перестаёт работать).
+   Меню горизонтальное, секции идут в порядке HTML.
+   Flex Box остаётся включённым, порядок возвращается через order.
    ========================================================= */
 @media screen and (min-width: 700px) {
 
   .header .container {
-    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
   }
 
   .brand { margin-bottom: 0; }
+  .site-logo { width: 44px; height: 44px; }
+  .site-title { font-size: 20px; }
 
-  .nav {
-    flex-direction: row;
-    gap: 15px;
-  }
+  .nav { flex-direction: row; gap: 18px; }
+  .nav a { padding: 4px 0; }
 
-  main.container {
-    display: block;
-  }
+  #table, #links, #form { order: 0; }
 
-  table th, table td, .custom-table th, .custom-table td {
-    padding: 8px 12px;
-    font-size: 15px;
-  }
-
-  table, .custom-table { min-width: 0; }
+  table { min-width: 0; }
+  table th, table td { padding: 8px 12px; font-size: 15px; }
 }
